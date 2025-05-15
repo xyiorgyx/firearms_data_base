@@ -1,22 +1,29 @@
 import tkinter as tk
-import sqlite3
-from firearms_ui import create_treeview
 from helpers.helpers import center_window
-from data.db_init import initialize_database
-firearms_data = []
+from ui.dashboard import create_dashboard
 
-root = tk.Tk()
-root.title("Firearms Manager")
-root.configure(bg="#2E2E2E")
-root.geometry(center_window(root, 500,500))
+def main():
+    root = tk.Tk()
+    root.title("Firearms Manager (AUS)")
+    root.configure(bg="#2E2E2E")
 
+    # Set window size and center
+    root.geometry(center_window(root, 1000, 700))  # width x height
 
-title = tk.Label(root, text="Firearms Data Base (AUS)", font= ("Helvetica", 20), bg="grey", )
-title.pack(padx=5, pady=5)
+    # App title label
+    title_label = tk.Label(
+        root,
+        text="Firearms Manager (AUS)",
+        font=("Helvetica", 20),
+        fg="white",
+        bg="#2E2E2E"
+    )
+    title_label.pack(pady=10)
 
+    # Load the dashboard UI
+    create_dashboard(root)
 
-create_treeview(root)
+    root.mainloop()
 
-
-initialize_database('data/firearms.db', 'data/schema.sql')
-root.mainloop()
+if __name__ == "__main__":
+    main()
